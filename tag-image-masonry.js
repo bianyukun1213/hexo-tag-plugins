@@ -2,7 +2,7 @@
     Image Masonry Tag: https://github.com/bigbite/macy.js
 
     Syntax:
-    {% image_masonry ..."assetImg|title" %}
+    {% image_masonry ..."assetImg|alt|title" %}
     
 */
 
@@ -13,9 +13,13 @@ hexo.extend.tag.register("image_masonry", function(args){
   args.forEach(function(e) {
     var item = e.split("|"); 
     var assetImg = item[0];
-    var title = item[1];
+    // var title = item[1];
+    var alt = item[1];
 
-    list += `<div><img src="/${assetPath + assetImg}" alt="${title}" /></div>`
+    var title = item[2] || '';
+
+    // list += `<div><img src="/${assetPath + assetImg}" alt="${title}" /></div>`
+    list += `<div><img src="${assetImg}" alt="${alt}" title="${title}"/></div>`
   });
 
   var id = "image-masonry-" + Math.random().toString(36).substring(2,8);
