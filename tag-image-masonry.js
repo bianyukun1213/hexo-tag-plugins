@@ -14,23 +14,23 @@ hexo.extend.tag.register("image_masonry", function(args){
     var item = e.split("|"); 
     var assetImg = item[0];
     // var title = item[1];
-    var alt = item[1];
+    var alt = item[1]; // 新增 alt。
 
     var title = item[2] || '';
 
     // list += `<div><img src="/${assetPath + assetImg}" alt="${title}" /></div>`
     list += `<div><img src="${assetImg}" alt="${alt}" title="${title}"/></div>`
   });
-
-  var id = "image-masonry-" + Math.random().toString(36).substring(2,8);
+  // 修改 id，并且使内联 javascript、macy 实例也附带 id，避免一个页面中放多个瀑布流报变量二次声明的错误。
+  var id = Math.random().toString(36).substring(2,8);
 
   var elements = `
-    <div class="image-masonry" id="${id}">
+    <div class="image-masonry" id="image-masonry-${id}">
       ${list}
     </div>
-    <script>
-      let macy = new Macy({
-        container: '#${id}',
+    <script class="image-masonry-script" id="image-masonry-script-${id}">
+      let macyAt${id} = new Macy({
+        container: '#image-masonry-${id}',
         trueOrder: false,
         waitForImages: false,
         useOwnImageLoader: false,
