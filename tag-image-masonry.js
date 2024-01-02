@@ -40,8 +40,8 @@ hexo.extend.tag.register('image_masonry', (args) => {
         mobileFirst: false,
         columns: ${imgCount < 3 ? imgCount : 3},
         margin: {
-          y: 6,
-          x: 6
+          y: 10,
+          x: 10
         },
         breakAt: {
           1024: ${imgCount < 2 ? imgCount : 2},
