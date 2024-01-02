@@ -13,13 +13,13 @@ hexo.extend.tag.register('image_masonry', (args) => {
   for (let i = 0; i < argsLength; i++) {
     const singleArg = args[i];
     const items = singleArg.split('|');
-    const assetImg = items[0];
-    const alt = items[1]; // 新增 alt。
-    const title = items[2] || '';
+    const img = items[0].trim();
+    const alt = items[1].trim(); // 新增 alt。
+    const title = items[2].trim() || '';
     // Redefin 的 img 有 margin-top。在这里我新建一个类 image-masonry-img，在 tag-image-masonry.css 里把 margin 归零。
     // 在 site-mod.js 里也可以写 Javascript 来归零，但是样式不会立即渲染，下一句代码执行时获取的还是旧样式，重新计算 masonry 也就没有效果，得写 timeout 等一下。
     // 我不想这么写，就还是在 CSS 里归零了。
-    list += `<div class="image-masonry-img-wrapper"><img class="image-masonry-img" src="${assetImg}" alt="${alt}" title="${title}"/></div>`
+    list += `<div class="image-masonry-img-wrapper"><img class="image-masonry-img" src="${img}" alt="${alt}" title="${title}"/></div>`
     imgCount++;
   }
   // 修改 id，并且使内联 javascript、macy 实例也附带 id，避免一个页面中放多个瀑布流报变量二次声明的错误。
