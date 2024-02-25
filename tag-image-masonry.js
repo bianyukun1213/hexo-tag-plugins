@@ -48,6 +48,10 @@ hexo.extend.tag.register('image_masonry', (args) => {
           768: ${imgCount < 1 ? imgCount : 1}
         }
       });
+      // 未加载完成时，让所有图片不要叠在一行。
+      macyAt${id}.runOnImageLoad(() => {
+        macyAt${id}.recalculate(true);
+      }, true);
     </script>
   `;
   return elements;
