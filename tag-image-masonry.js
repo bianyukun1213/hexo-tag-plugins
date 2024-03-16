@@ -2,7 +2,7 @@
     Image Masonry Tag: https://github.com/bigbite/macy.js
 
     Syntax:
-    {% image_masonry ..."assetImg|alt|title" %}
+    {% image_masonry ..."assetImg[&]alt[&]title" %}
     
 */
 
@@ -12,7 +12,7 @@ hexo.extend.tag.register('image_masonry', (args) => {
   const argsLength = args.length;
   for (let i = 0; i < argsLength; i++) {
     const singleArg = args[i];
-    const items = singleArg.split('|');
+    const items = singleArg.split('[&]');
     const img = items[0].trim();
     const alt = items[1].trim(); // 新增 alt。
     const title = items[2] ? items[2].trim() : '';
