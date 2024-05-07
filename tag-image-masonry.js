@@ -43,7 +43,7 @@ hexo.extend.tag.register('image_masonry', function (args) {
   // 默认 3 列，如果 list 里图片少于 3 个，以 list 里图片个数为准。
   // 如果不这样写，假如 list 里只有两个图片，则这两个图片会即在左 2/3 的位置，右 1/3 是空白，不好看。
   // 需要注意的是，要在 site-mod.js 里重新计算 masonry，需要用 var 而不是 let 声明 macyxxx。
-  let currentCount;
+  let currentCount = 0;
   if (typeof masonryCount[prefix] === 'undefined')
     currentCount = masonryCount[prefix] = 0;
   else
