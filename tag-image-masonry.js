@@ -74,6 +74,13 @@ hexo.extend.tag.register('image_masonry', function (args) {
       macy${id}.runOnImageLoad(() => {
         macy${id}.recalculate(true);
       }, true);
+      // a dirty fix:
+      // 遇到一个问题，页面里有两个 macy 实例，加载相同的图片，从内存缓存中加载时，recalculate 总是不生效。
+      // 似乎能触发 runOnImageLoad，因为能打印日志。并且我还在附近查找加载完成的图片，手动触发 recalculate，手动触发 resize 事件，都没有效果。
+      // 目前只能加一个 timeout，实测能解决问题。
+      setTimeout(() => {
+        macy${id}.recalculate(true);
+      }, 1000);
     </script>
   `;
   return elements;
