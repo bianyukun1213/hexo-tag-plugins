@@ -15,7 +15,7 @@ String.prototype.hashCode = function () {
     Image Masonry Tag: https://github.com/bigbite/macy.js
 
     Syntax:
-    {% image_masonry ..."assetImg[&]alt[&]title" %}
+    {% image_masonry ..."assetImg[&]alt[&]title[&]data-mask" %}
     
 */
 
@@ -31,10 +31,11 @@ hexo.extend.tag.register('image_masonry', function (args) {
     const img = items[0].trim();
     const alt = items[1].trim(); // 新增 alt。
     const title = items[2] ? items[2].trim() : '';
+    const dataMask = typeof items[3] !== 'undefined' ? items[3].trim() : undefined; // 新增 data-mask。
     // Redefine 的 img 有 margin-top。在这里我新建一个类 image-masonry-img，在 tag-image-masonry.css 里把 margin 归零。
     // 在 site-mod.js 里也可以写 JavaScript 来归零，但是样式不会立即渲染，下一句代码执行时获取的还是旧样式，重新计算 masonry 也就没有效果，得写 timeout 等一下。
     // 我不想这么写，就还是在 CSS 里归零了。
-    list += `<div class="image-masonry-img-wrapper"><img class="image-masonry-img" src="${img}" alt="${alt}" title="${title}"/></div>`;
+    list += `<div class="image-masonry-img-wrapper"><img class="image-masonry-img" src="${img}" alt="${alt}" title="${title}"${typeof dataMask !== 'undefined' ? ' data-mask="' + dataMask + '"' : ''}/></div>`;
     imgCount++;
   }
   // 修改 id，并且使内联 javascript、macy 实例也附带 id，避免一个页面中放多个瀑布流报变量二次声明的错误。
